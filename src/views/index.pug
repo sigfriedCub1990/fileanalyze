@@ -1,0 +1,20 @@
+doctype html
+head
+  title File Metadata
+  link(rel='shortcut icon' href='https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png' type='image/x-icon')
+  link(href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css')
+  link(href='/public/style.css' rel='stylesheet' type='text/css')
+.container
+  h2 API Project: File Metadata Microservice
+  h3 Usage:
+  p
+    | Please Upload a File ...
+  .view
+    h4#output
+    form(enctype='multipart/form-data' method='POST' action='/api/fileanalyse')
+      input#inputfield(type='file' name='upfile')
+      input#button(type='submit' value='Upload')
+.footer
+  p
+    | by
+    a(href='http://www.freecodecamp.com') freeCodeCamp
