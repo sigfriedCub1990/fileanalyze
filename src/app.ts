@@ -1,10 +1,16 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
+import morgan from "morgan";
+import multer from "multer";
 
 dotenv.config();
 
 const app = express();
+
+const memoryStorage = multer.memoryStorage();
+const upload = multer({ storage: memoryStorage }).single("upfile");
 
 app.use(morgan("dev"));
 app.use(cors());
@@ -19,11 +25,11 @@ app.get("/", (_req: Request, res: Response) => {
   res.render("index");
 });
 
-app.get("/api", (_, res: Response) => {
-  const date = new Date();
+app.post("/api/fileanalyse", upload, (req: Request, res: Response) => {
   res.json({
-    unix: date.getTime(),
-    utc: date.toUTCString(),
+    name: req.file?.originalname,
+    type: req.file?.mimetype,
+    size: req.file?.size,
   });
 });
 
